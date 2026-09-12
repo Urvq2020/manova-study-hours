@@ -1,0 +1,752 @@
+<!doctype html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#31261C">
+<title>مانوڤا · منطقة الدراسة</title>
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>📚</text></svg>">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;500;700;800&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#F5EFE3; --card:#FFFCF5; --card2:#FBF6EA;
+  --ink:#31261C; --muted:#8A7A66; --line:#E6DBC6;
+  --accent:#B4552D; --accent-2:#8F3F1E; --accent-soft:#F6E3D8;
+  --good:#5F7A4E; --good-soft:#E9F0E2; --warn:#A86A2D; --warn-soft:#F7EBD9;
+  --danger:#A83A2E; --danger-soft:#F7E1DE;
+  --radius:16px; --shadow:0 1px 2px rgba(49,38,28,.06),0 10px 30px -18px rgba(49,38,28,.25);
+}
+*{box-sizing:border-box}
+html,body{margin:0;padding:0}
+body{
+  font-family:'Tajawal',-apple-system,'Segoe UI',system-ui,sans-serif;
+  background:
+    radial-gradient(1200px 500px at 85% -10%, #FBF3E4 0%, transparent 60%),
+    radial-gradient(900px 420px at -10% 110%, #F0E7D3 0%, transparent 55%),
+    var(--bg);
+  color:var(--ink); min-height:100vh; font-size:16px; line-height:1.55;
+}
+.wrap{max-width:760px;margin:0 auto;padding:0 16px 48px}
+
+/* top bar */
+.topbar{position:sticky;top:0;z-index:20;backdrop-filter:blur(8px);
+  background:rgba(245,239,227,.85);border-bottom:1px solid var(--line)}
+.topbar-in{max-width:760px;margin:0 auto;padding:10px 16px;display:flex;align-items:center;gap:10px}
+.brand{display:flex;align-items:center;gap:10px;font-weight:800;font-size:1.05rem}
+.brand .logo{width:36px;height:36px;border-radius:12px;background:linear-gradient(135deg,var(--accent),var(--accent-2));
+  color:#fff;display:grid;place-items:center;font-size:1.1rem;box-shadow:var(--shadow)}
+.brand small{display:block;font-weight:500;color:var(--muted);font-size:.72rem;line-height:1.1}
+.topbar .spacer{flex:1}
+.chip-btn{border:1px solid var(--line);background:var(--card);color:var(--ink);
+  border-radius:999px;padding:6px 14px;font:inherit;font-size:.85rem;font-weight:700;cursor:pointer}
+.chip-btn:hover{border-color:var(--accent);color:var(--accent)}
+
+/* cards & layout */
+.card{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);
+  box-shadow:var(--shadow);padding:20px;margin-top:16px}
+.card h2{margin:0 0 4px;font-size:1.15rem;font-weight:800}
+.card .sub{color:var(--muted);font-size:.9rem;margin:0 0 14px}
+.center{text-align:center}
+.hero-title{text-align:center;margin:26px 0 4px;font-size:1.5rem;font-weight:800}
+.hero-sub{text-align:center;color:var(--muted);margin:0 0 6px;font-size:.95rem}
+
+/* forms */
+.field{margin:14px 0}
+.field label{display:block;font-size:.85rem;font-weight:700;color:var(--ink);margin-bottom:6px}
+.input{width:100%;background:#FFFDF7;border:1.5px solid var(--line);border-radius:12px;
+  padding:13px 14px;font:inherit;color:var(--ink);outline:none;transition:border .15s, box-shadow .15s}
+.input:focus{border-color:var(--accent);box-shadow:0 0 0 3px var(--accent-soft)}
+.input.big{font-size:1.35rem;font-weight:700;text-align:center;letter-spacing:.06em;direction:ltr}
+.hint{font-size:.78rem;color:var(--muted);margin-top:6px;text-align:center}
+.err{color:var(--danger);font-size:.85rem;font-weight:700;margin-top:10px;text-align:center;min-height:1.2em}
+
+/* buttons */
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;border:none;cursor:pointer;
+  font:inherit;font-weight:800;border-radius:12px;padding:13px 20px;font-size:1rem;
+  background:var(--accent);color:#fff;transition:transform .06s, background .15s;width:100%}
+.btn:hover{background:var(--accent-2)}
+.btn:active{transform:scale(.985)}
+.btn.hero{font-size:1.2rem;padding:16px 20px;border-radius:14px}
+.btn.ghost{background:transparent;color:var(--ink);border:1.5px solid var(--line)}
+.btn.ghost:hover{border-color:var(--accent);color:var(--accent);background:transparent}
+.btn.good{background:var(--good)}
+.btn.good:hover{background:#4E6640}
+.btn.danger{background:transparent;color:var(--danger);border:1.5px solid var(--danger-soft)}
+.btn.danger:hover{border-color:var(--danger)}
+.btn.sm{padding:6px 12px;font-size:.8rem;border-radius:9px;width:auto}
+
+/* timer */
+.timer-card{background:linear-gradient(160deg,#FFFCF5, #F8EFDE);text-align:center;padding:28px 20px}
+.timer{font-size:clamp(2.6rem, 12vw, 4rem);font-weight:800;letter-spacing:.04em;
+  font-variant-numeric:tabular-nums;direction:ltr;line-height:1.1}
+.timer.zero{color:var(--muted)}
+.live-cost{margin-top:2px;color:var(--accent);font-weight:800;font-size:1.05rem}
+.session-meta{color:var(--muted);font-size:.85rem;margin-top:6px}
+.pill{display:inline-flex;align-items:center;gap:7px;border-radius:999px;padding:4px 12px;
+  font-size:.78rem;font-weight:800}
+.pill.on{background:var(--good-soft);color:var(--good)}
+.pill.off{background:var(--card2);color:var(--muted);border:1px solid var(--line)}
+.pill.due{background:var(--warn-soft);color:var(--warn)}
+.pill.ok{background:var(--good-soft);color:var(--good)}
+.dot{width:8px;height:8px;border-radius:50%;background:currentColor;animation:pulse 1.6s infinite}
+@keyframes pulse{0%{opacity:1}50%{opacity:.25}100%{opacity:1}}
+
+/* stats */
+.stats{display:grid;grid-template-columns:repeat(2,1fr);gap:10px;margin-top:16px}
+@media(min-width:560px){.stats{grid-template-columns:repeat(4,1fr)}}
+.stat{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:14px 12px;text-align:center}
+.stat b{display:block;font-size:1.35rem;font-weight:800;font-variant-numeric:tabular-nums}
+.stat span{display:block;color:var(--muted);font-size:.75rem;font-weight:700;margin-top:2px}
+
+/* history */
+.hist{list-style:none;margin:0;padding:0}
+.hist li{display:flex;align-items:center;gap:10px;padding:12px 2px;border-bottom:1px dashed var(--line)}
+.hist li:last-child{border-bottom:none}
+.hist .d{flex:1}
+.hist .d b{display:block;font-size:.92rem}
+.hist .d span{color:var(--muted);font-size:.78rem}
+.hist .amt{font-weight:800;font-variant-numeric:tabular-nums;text-align:end;direction:ltr}
+.hist .amt small{display:block;color:var(--muted);font-weight:500;font-size:.72rem}
+.empty{text-align:center;color:var(--muted);padding:26px 10px;font-size:.9rem}
+
+/* admin table */
+.tbl-wrap{overflow-x:auto;margin-top:8px}
+.urow{display:grid;grid-template-columns:150px 1fr 1fr 1fr 1fr;min-width:680px;gap:6px;
+  align-items:center;padding:12px 6px;border-bottom:1px solid var(--line)}
+.urow.head{color:var(--muted);font-size:.75rem;font-weight:800;border-bottom:1.5px solid var(--line);padding:8px 6px}
+.urow .mob{direction:ltr;text-align:start;font-weight:800;font-variant-numeric:tabular-nums}
+.urow .mob .pill{margin-top:3px;margin-inline-start:0}
+.urow .num{font-weight:700;font-variant-numeric:tabular-nums;font-size:.92rem}
+.urow .num.due{color:var(--warn)}
+.urow .acts{display:flex;flex-wrap:wrap;gap:6px;justify-content:flex-end}
+.live-dur{color:var(--good);font-weight:800}
+
+/* misc */
+.linklike{background:none;border:none;color:var(--accent);font:inherit;font-weight:700;cursor:pointer;
+  padding:0;text-decoration:underline;text-underline-offset:3px}
+.row-between{display:flex;align-items:center;justify-content:space-between;gap:10px;flex-wrap:wrap}
+.divider{border:none;border-top:1px solid var(--line);margin:18px 0}
+#toast{position:fixed;bottom:22px;left:50%;transform:translateX(-50%) translateY(20px);
+  background:var(--ink);color:#FBF6EA;padding:11px 22px;border-radius:999px;font-weight:700;font-size:.9rem;
+  opacity:0;pointer-events:none;transition:all .25s;z-index:50;max-width:90vw;text-align:center}
+#toast.show{opacity:1;transform:translateX(-50%) translateY(0)}
+.footnote{text-align:center;color:var(--muted);font-size:.75rem;margin-top:26px}
+select.input{appearance:auto}
+</style>
+</head>
+<body>
+<div class="topbar"><div class="topbar-in" id="topbar"></div></div>
+<div class="wrap"><main id="app"></main></div>
+<div id="toast" role="status"></div>
+
+<script>
+'use strict';
+/* ============================================================
+   Manova · Study Area hours tracker
+   Single-file app. All data stays in this browser (localStorage).
+   Admin passcode is created on first launch (one-time setup).
+   ============================================================ */
+
+const LS_KEY = 'manova_study_v1';
+const LS_LANG = 'manova_lang';
+
+/* ---------------- i18n ---------------- */
+const I18N = {
+ar: {
+  brand:'مانوڤا', brandSub:'منطقة الدراسة',
+  heroTitle:'ساعاتك بين يديك', heroSub:'سجّل دخولك برقم جوالك وتابع ساعات دراستك',
+  signIn:'تسجيل الدخول', mobile:'رقم الجوال', mobilePh:'05X XXX XXXX',
+  next:'متابعة', adminLink:'دخول المشرف',
+  badMobile:'أدخل رقم جوال سعودي صحيح يبدأ بـ 05',
+  newPinTitle:'مرحباً بك 👋', newPinSub:'اختر رقماً سريعاً من 4 أرقام لدخولك القادم',
+  pin:'الرقم السري', pin2:'تأكيد الرقم السري', create:'إنشاء حسابي',
+  enterPinTitle:'أدخل رقمك السري', wrongPin:'الرقم السري غير صحيح',
+  lock:'محاولات كثيرة، انتظر {s} ثانية',
+  mismatch:'الرقمان غير متطابقين', shortPin:'الرقم يجب أن يكون 4 أرقام',
+  hello:'أهلاً بك', rateHint:'التعرفة: {r} ر.س / ساعة',
+  startBtn:'بدء الجلسة', endBtn:'إنهاء الجلسة',
+  startedAt:'بدأت في {t}', runningNow:'الجلسة جارية',
+  statToday:'اليوم', statTotal:'إجمالي الساعات', statVisits:'الزيارات', statDue:'المستحق',
+  history:'سجل الجلسات', noHistory:'لا توجد جلسات بعد — ابدأ أول جلسة لك ☕',
+  paidBadge:'مدفوع', unpaidBadge:'غير مدفوع',
+  changePinLink:'تغيير الرقم السري', curPin:'الرقم السري الحالي', newPin:'الرقم السري الجديد',
+  pinChanged:'تم تغيير الرقم السري ✓', back:'رجوع', logout:'خروج',
+  sessionEnded:'انتهت الجلسة: {d} · {c}',
+  adminTitle:'دخول المشرف', passcode:'رمز الدخول', adminIn:'دخول',
+  wrongPass:'الرمز غير صحيح',
+  activeNow:'نشطة الآن', members:'الأعضاء', revToday:'إيراد اليوم',
+  settings:'الإعدادات', rateLabel:'السعر بالساعة (ر.س)', roundLabel:'طريقة الاحتساب',
+  rExact:'بالدقيقة (تناسبي)', r15:'تقريب لأعلى 15 دقيقة', r30:'تقريب لأعلى 30 دقيقة', r60:'تقريب لأعلى ساعة كاملة',
+  save:'حفظ', saved:'تم الحفظ ✓',
+  allUsers:'كل الأرقام والساعات', noUsers:'لا يوجد أعضاء بعد — سيظهرون هنا بعد أول تسجيل دخول',
+  colHours:'الساعات', colVisits:'الزيارات', colDue:'المستحق', colLast:'آخر نشاط',
+  markPaid:'تسديد', resetPinA:'تصفير الرمز', deleteA:'حذف',
+  exportCsv:'تصدير CSV', adminPassLink:'تغيير رمز المشرف',
+  activeBadge:'نشط', never:'—', hourWord:'ساعة',
+  confirmEnd:'إنهاء جلسة هذا العضو؟', confirmPaid:'تمييز كل جلسات هذا العضو كمدفوعة؟',
+  confirmReset:'تصفير الرقم السري لهذا العضو؟ سيضيف رقماً جديداً عند دخوله.',
+  confirmDel:'حذف هذا العضو وكل سجلاته نهائياً؟',
+  welcomeRun:'أهلاً بك في تطبيق ساعات الدراسة', welcomeRunSub:'خطوة واحدة: أنشئ رمز دخول المشرف (يُطلب مرة واحدة فقط)',
+  setPass:'تعيين الرمز', pass2:'تأكيد الرمز',
+  passSetOk:'تم تعيين رمز المشرف ✓', passLen:'الرمز يجب أن يكون 4 أرقام على الأقل',
+  deviceNote:'بيانات هذا التطبيق محفوظة في هذا الجهاز فقط — صدّر نسخة CSV بشكل دوري',
+  h:'س', m:'د', sar:'ر.س', usersCount:'عضو'
+},
+en: {
+  brand:'Manova', brandSub:'Study Area',
+  heroTitle:'Your hours, tracked simply', heroSub:'Sign in with your mobile and track your study hours',
+  signIn:'Sign in', mobile:'Mobile number', mobilePh:'05X XXX XXXX',
+  next:'Continue', adminLink:'Admin sign-in',
+  badMobile:'Enter a valid Saudi mobile starting with 05',
+  newPinTitle:'Welcome 👋', newPinSub:'Choose a quick 4-digit password for next time',
+  pin:'Quick password', pin2:'Confirm password', create:'Create my account',
+  enterPinTitle:'Enter your password', wrongPin:'Wrong password',
+  lock:'Too many attempts — wait {s}s',
+  mismatch:'Passwords do not match', shortPin:'Password must be 4 digits',
+  hello:'Hello', rateHint:'Rate: {r} SAR / hour',
+  startBtn:'Start session', endBtn:'End session',
+  startedAt:'Started at {t}', runningNow:'Session running',
+  statToday:'Today', statTotal:'Total hours', statVisits:'Visits', statDue:'Balance due',
+  history:'Session history', noHistory:'No sessions yet — start your first one ☕',
+  paidBadge:'Paid', unpaidBadge:'Unpaid',
+  changePinLink:'Change password', curPin:'Current password', newPin:'New password',
+  pinChanged:'Password changed ✓', back:'Back', logout:'Log out',
+  sessionEnded:'Session ended: {d} · {c}',
+  adminTitle:'Admin sign-in', passcode:'Passcode', adminIn:'Sign in',
+  wrongPass:'Wrong passcode',
+  activeNow:'Active now', members:'Members', revToday:"Today's revenue",
+  settings:'Settings', rateLabel:'Hourly rate (SAR)', roundLabel:'Billing method',
+  rExact:'Per minute (pro-rated)', r15:'Round up to 15 min', r30:'Round up to 30 min', r60:'Round up to full hour',
+  save:'Save', saved:'Saved ✓',
+  allUsers:'All mobiles & hours', noUsers:'No members yet — they will appear after first sign-in',
+  colHours:'Hours', colVisits:'Visits', colDue:'Due', colLast:'Last activity',
+  markPaid:'Mark paid', resetPinA:'Reset PIN', deleteA:'Delete',
+  exportCsv:'Export CSV', adminPassLink:'Change admin passcode',
+  activeBadge:'Active', never:'—', hourWord:'hour',
+  confirmEnd:'End this member\u2019s session?', confirmPaid:'Mark all of this member\u2019s sessions as paid?',
+  confirmReset:'Reset this member\u2019s PIN? They will set a new one at next sign-in.',
+  confirmDel:'Permanently delete this member and all their records?',
+  welcomeRun:'Welcome to Study Hours', welcomeRunSub:'One step: create the admin passcode (asked once)',
+  setPass:'Set passcode', pass2:'Confirm passcode',
+  passSetOk:'Admin passcode set ✓', passLen:'Passcode must be at least 4 digits',
+  deviceNote:'Data lives on this device only — export a CSV backup regularly',
+  h:'h', m:'m', sar:'SAR', usersCount:'members'
+}};
+
+let LANG = localStorage.getItem(LS_LANG) || 'ar';
+const t = (k, vars) => {
+  let s = (I18N[LANG] && I18N[LANG][k]) || I18N.en[k] || k;
+  if (vars) for (const v of Object.keys(vars)) s = s.split('{'+v+'}').join(vars[v]);
+  return s;
+};
+
+/* ---------------- storage ---------------- */
+function defaults(){ return { settings:{hourlyRate:10, rounding:'15m', adminHash:null, adminSalt:null}, users:{} }; }
+function load(){
+  try{ const d = JSON.parse(localStorage.getItem(LS_KEY));
+    if (d && d.settings && d.users) return d;
+  }catch(e){}
+  return defaults();
+}
+let db = load();
+const save = () => localStorage.setItem(LS_KEY, JSON.stringify(db));
+window.addEventListener('storage', e => { if (e.key === LS_KEY){ db = load(); render(); } });
+
+/* ---------------- helpers ---------------- */
+const $ = id => document.getElementById(id);
+const val = id => ($(id) ? $(id).value.trim() : '');
+const setErr = msg => { const el = $('err'); if (el) el.textContent = msg || ''; };
+
+function normalizeMobile(input){
+  let d = (input || '').replace(/\D/g, '');
+  if (d.startsWith('00966')) d = d.slice(2);
+  if (d.startsWith('966')) d = '0' + d.slice(3);
+  else if (d.length === 9 && d.startsWith('5')) d = '0' + d;
+  return /^05\d{8}$/.test(d) ? d : null;
+}
+const fmtMobile = m => m.slice(0,3) + ' ' + m.slice(3,6) + ' ' + m.slice(6);
+const localeOf = () => LANG === 'ar' ? 'ar-SA-u-nu-latn-ca-gregory' : 'en-GB';
+const fmtTime = ts => new Date(ts).toLocaleTimeString(localeOf(), {hour:'2-digit', minute:'2-digit'});
+const fmtDate = ts => new Date(ts).toLocaleDateString(localeOf(), {day:'numeric', month:'short'}) + ' · ' + fmtTime(ts);
+const startOfToday = () => { const d = new Date(); d.setHours(0,0,0,0); return d.getTime(); };
+const fmtDur = min => { const h = Math.floor(min/60), m = Math.round(min%60);
+  if (h === 0) return m + t('m');
+  return m ? (h + t('h') + ' ' + m + t('m')) : (h + t('h')); };
+const fmtClock = ms => { ms = Math.max(0, ms);
+  const s = Math.floor(ms/1000), hh = String(Math.floor(s/3600)).padStart(2,'0'),
+  mm = String(Math.floor(s%3600/60)).padStart(2,'0'), ss = String(s%60).padStart(2,'0');
+  return hh + ':' + mm + ':' + ss; };
+const r2 = x => Math.round(x*100)/100;
+const fmtMoney = x => r2(x) + ' ' + t('sar');
+
+function calcCost(min){
+  const rate = Number(db.settings.hourlyRate) || 0;
+  const inc = {exact:0, '15m':15, '30m':30, '60m':60}[db.settings.rounding] || 0;
+  if (inc) min = Math.ceil(min/inc)*inc;
+  return r2(min/60*rate);
+}
+
+/* PIN hashing (SHA-256 + salt, with non-secure-context fallback) */
+async function sha(s){
+  if (window.crypto && crypto.subtle){
+    const b = await crypto.subtle.digest('SHA-256', new TextEncoder().encode(s));
+    return [...new Uint8Array(b)].map(x => x.toString(16).padStart(2,'0')).join('');
+  }
+  let h = 5381; for (const c of s) h = ((h*33) ^ c.charCodeAt(0)) >>> 0;
+  return 'x' + h.toString(16);
+}
+function makeSalt(){
+  const a = new Uint8Array(8); crypto.getRandomValues(a);
+  return [...a].map(x => x.toString(16).padStart(2,'0')).join('');
+}
+async function hashNew(pin){ const salt = makeSalt(); return {salt, hash: await sha(salt + '|' + pin)}; }
+async function verifyPin(pin, salt, hash){ return !hash ? false : (await sha(salt + '|' + pin)) === hash; }
+
+/* ---------------- UI state ---------------- */
+const S = { view:'home', mobile:null, admin:false, tries:0, lockUntil:0 };
+let toastTimer = null;
+function toast(msg){
+  const el = $('toast'); el.textContent = msg; el.classList.add('show');
+  clearTimeout(toastTimer); toastTimer = setTimeout(() => el.classList.remove('show'), 2800);
+}
+function go(view){ S.view = view; render(); window.scrollTo(0,0); }
+
+/* ---------------- render ---------------- */
+function render(){
+  document.documentElement.lang = LANG;
+  document.documentElement.dir = LANG === 'ar' ? 'rtl' : 'ltr';
+  if (!db.settings.adminHash && S.view !== 'firstRun') S.view = 'firstRun';
+  renderTopbar();
+  const app = $('app');
+  const V = {firstRun:vFirstRun, home:vHome, pinSetup:vPinSetup, pinLogin:vPinLogin,
+             userDash:vUserDash, changePin:vChangePin, adminLogin:vAdminLogin,
+             adminDash:vAdminDash, adminPass:vAdminPass};
+  app.innerHTML = (V[S.view] || vHome)();
+  const f = app.querySelector('input,select'); if (f) f.focus();
+}
+
+function renderTopbar(){
+  const logged = ['userDash','changePin'].includes(S.view) ? 'user'
+               : ['adminDash','adminPass'].includes(S.view) ? 'admin' : null;
+  $('topbar').innerHTML = `
+    <div class="brand"><div class="logo">📚</div>
+      <div>${t('brand')}<small>${t('brandSub')}</small></div></div>
+    <div class="spacer"></div>
+    ${logged ? `<button class="chip-btn" onclick="A.logout()">${t('logout')}</button>` : ''}
+    <button class="chip-btn" onclick="A.toggleLang()">${LANG === 'ar' ? 'EN' : 'عربي'}</button>`;
+}
+
+function vFirstRun(){
+  return `
+  <div class="hero-title">☕ ${t('brand')} · ${t('brandSub')}</div>
+  <p class="hero-sub">${t('heroSub')}</p>
+  <div class="card" style="max-width:430px;margin:16px auto">
+    <h2 class="center">${t('welcomeRun')}</h2>
+    <p class="sub center">${t('welcomeRunSub')}</p>
+    <form onsubmit="return A.submitFirstRun(event)">
+      <div class="field"><label>${t('passcode')}</label>
+        <input id="p1" class="input big" type="password" inputmode="numeric" maxlength="8" autocomplete="off" required></div>
+      <div class="field"><label>${t('pass2')}</label>
+        <input id="p2" class="input big" type="password" inputmode="numeric" maxlength="8" autocomplete="off" required></div>
+      <div class="err" id="err"></div>
+      <button class="btn hero" type="submit">${t('setPass')}</button>
+    </form>
+  </div>`;
+}
+
+function vHome(){
+  return `
+  <div class="hero-title">☕ ${t('brand')} · ${t('brandSub')}</div>
+  <p class="hero-sub">${t('heroSub')}</p>
+  <div class="card" style="max-width:430px;margin:16px auto">
+    <h2 class="center">${t('signIn')}</h2>
+    <p class="sub center">${t('mobile')}</p>
+    <form onsubmit="return A.submitMobile(event)">
+      <input id="mob" class="input big" type="tel" inputmode="tel" placeholder="${t('mobilePh')}" autocomplete="tel" required>
+      <div class="hint">+966 5X XXX XXXX</div>
+      <div class="err" id="err"></div>
+      <button class="btn hero" type="submit">${t('next')}</button>
+    </form>
+  </div>
+  <p class="center" style="margin-top:6px">
+    <button class="linklike" onclick="A.go('adminLogin')">${t('adminLink')}</button>
+  </p>`;
+}
+
+function pinHead(title, sub){
+  return `<button class="linklike" onclick="A.go('home')" style="margin-top:18px;display:inline-block">← ${t('back')}</button>
+  <div class="card" style="max-width:430px;margin:8px auto 0">
+    <h2 class="center">${title}</h2>
+    <p class="sub center">${sub}</p>`;
+}
+
+function vPinSetup(){
+  return pinHead(t('newPinTitle'), t('newPinSub')) + `
+    <form onsubmit="return A.submitPinSetup(event)">
+      <div class="field"><input id="p1" class="input big" type="password" inputmode="numeric" maxlength="6" placeholder="••••" autocomplete="off" required></div>
+      <div class="field"><input id="p2" class="input big" type="password" inputmode="numeric" maxlength="6" placeholder="${t('pin2')}" autocomplete="off" required></div>
+      <div class="err" id="err"></div>
+      <button class="btn hero" type="submit">${t('create')}</button>
+    </form>
+  </div>`;
+}
+
+function vPinLogin(){
+  return pinHead(fmtMobile(S.mobile), t('enterPinTitle')) + `
+    <form onsubmit="return A.submitPin(event)">
+      <div class="field"><input id="p1" class="input big" type="password" inputmode="numeric" maxlength="6" placeholder="••••" autocomplete="off" required></div>
+      <div class="err" id="err"></div>
+      <button class="btn hero" type="submit">${t('signIn')}</button>
+    </form>
+  </div>`;
+}
+
+function vUserDash(){
+  const m = S.mobile, u = db.users[m];
+  if (!u){ S.mobile = null; return vHome(); }
+  const act = u.activeSession;
+  const today = startOfToday();
+  const todayMin = u.sessions.filter(x => x.e >= today).reduce((a,b) => a + b.m, 0);
+  const totalMin = u.sessions.reduce((a,b) => a + b.m, 0);
+  const due = u.sessions.filter(x => !x.p).reduce((a,b) => a + b.c, 0);
+  const rate = Number(db.settings.hourlyRate) || 0;
+
+  const sessionCard = act ? `
+    <div class="card timer-card">
+      <span class="pill on"><span class="dot"></span>${t('runningNow')}</span>
+      <div class="timer" id="liveClock">--:--:--</div>
+      <div class="live-cost" id="liveCost"></div>
+      <div class="session-meta">${t('startedAt', {t: fmtTime(act.startTs)})}</div>
+      <div style="margin-top:16px"><button class="btn hero" style="background:var(--danger)" onclick="A.end()">${t('endBtn')}</button></div>
+    </div>` : `
+    <div class="card timer-card">
+      <div class="timer zero">00:00:00</div>
+      <div class="session-meta">${rate ? t('rateHint', {r: rate}) : ''}</div>
+      <div style="margin-top:16px"><button class="btn hero" onclick="A.start()">${t('startBtn')}</button></div>
+    </div>`;
+
+  const hist = u.sessions.length ? `
+    <ul class="hist">${u.sessions.slice(0,25).map(x => `
+      <li><div class="d"><b>${fmtDate(x.e)}</b><span>${fmtDur(x.m)}</span></div>
+      <div class="amt">${x.c ? fmtMoney(x.c) : '—'}
+        <small>${x.p ? '✓ ' + t('paidBadge') : t('unpaidBadge')}</small></div></li>`).join('')}
+    </ul>` : `<div class="empty">${t('noHistory')}</div>`;
+
+  return `
+  <div class="row-between" style="margin-top:18px">
+    <div><b>${t('hello')} 🙌</b>
+      <div style="color:var(--muted);font-size:.9rem;direction:ltr;text-align:start">${fmtMobile(m)}</div></div>
+    <button class="chip-btn" onclick="A.go('changePin')">${t('changePinLink')}</button>
+  </div>
+  ${sessionCard}
+  <div class="stats">
+    <div class="stat"><b>${fmtDur(todayMin)}</b><span>${t('statToday')}</span></div>
+    <div class="stat"><b>${fmtDur(totalMin)}</b><span>${t('statTotal')}</span></div>
+    <div class="stat"><b>${u.sessions.length}</b><span>${t('statVisits')}</span></div>
+    <div class="stat"><b style="color:${due ? 'var(--warn)' : 'inherit'}">${due ? fmtMoney(due) : '0'}</b><span>${t('statDue')}</span></div>
+  </div>
+  <div class="card"><h2>${t('history')}</h2>${hist}</div>
+  <p class="footnote">${t('deviceNote')}</p>`;
+}
+
+function vChangePin(){
+  return pinHead(t('changePinLink'), fmtMobile(S.mobile)) + `
+    <form onsubmit="return A.submitChangePin(event)">
+      <div class="field"><label>${t('curPin')}</label>
+        <input id="pc" class="input big" type="password" inputmode="numeric" maxlength="6" required></div>
+      <div class="field"><label>${t('newPin')}</label>
+        <input id="p1" class="input big" type="password" inputmode="numeric" maxlength="6" required></div>
+      <div class="field"><label>${t('pin2')}</label>
+        <input id="p2" class="input big" type="password" inputmode="numeric" maxlength="6" required></div>
+      <div class="err" id="err"></div>
+      <button class="btn hero" type="submit">${t('save')}</button>
+    </form>
+  </div>`;
+}
+
+function vAdminLogin(){
+  return pinHead(t('adminTitle'), t('brand') + ' · ' + t('brandSub')) + `
+    <form onsubmit="return A.submitAdmin(event)">
+      <div class="field"><input id="p1" class="input big" type="password" inputmode="numeric" maxlength="8" placeholder="${t('passcode')}" autocomplete="off" required></div>
+      <div class="err" id="err"></div>
+      <button class="btn hero" type="submit">${t('adminIn')}</button>
+    </form>
+  </div>`;
+}
+
+function userTotals(m){
+  const u = db.users[m];
+  const totalMin = u.sessions.reduce((a,b) => a + b.m, 0);
+  const due = u.sessions.filter(x => !x.p).reduce((a,b) => a + b.c, 0);
+  const last = Math.max(u.createdAt || 0, u.activeSession ? u.activeSession.startTs : 0,
+    ...u.sessions.map(x => x.e), 0);
+  return {totalMin, due, last};
+}
+
+function vAdminDash(){
+  const users = Object.keys(db.users).sort((a,b) => userTotals(b).last - userTotals(a).last);
+  const today = startOfToday();
+  let revToday = 0, activeNow = 0, totalDue = 0;
+  for (const m of users){ const u = db.users[m];
+    if (u.activeSession) activeNow++;
+    revToday += u.sessions.filter(x => x.e >= today).reduce((a,b) => a + b.c, 0);
+    totalDue += u.sessions.filter(x => !x.p).reduce((a,b) => a + b.c, 0);
+  }
+  const rows = users.map(m => {
+    const u = db.users[m], tt = userTotals(m);
+    return `<div class="urow">
+      <div class="mob">${fmtMobile(m)}<br>
+        ${u.activeSession
+          ? `<span class="pill on"><span class="dot"></span><span class="live-dur" data-m="${m}">${fmtDur(Math.max(1,Math.round((Date.now()-u.activeSession.startTs)/60000)))}</span></span>`
+          : `<span class="pill off">${t('never')}</span>`}
+      </div>
+      <div class="num">${fmtDur(tt.totalMin)}</div>
+      <div class="num">${u.sessions.length}</div>
+      <div class="num ${tt.due ? 'due' : ''}">${tt.due ? fmtMoney(tt.due) : '—'}</div>
+      <div class="acts">
+        ${u.activeSession ? `<button class="btn sm danger" onclick="A.adminEnd('${m}')">${t('endBtn')}</button>` : ''}
+        ${tt.due ? `<button class="btn sm good" onclick="A.markPaid('${m}')">${t('markPaid')}</button>` : ''}
+        <button class="btn sm ghost" onclick="A.resetPin('${m}')">${t('resetPinA')}</button>
+        <button class="btn sm danger" onclick="A.delUser('${m}')">${t('deleteA')}</button>
+      </div>
+    </div>`;
+  }).join('');
+
+  return `
+  <div class="stats" style="margin-top:18px">
+    <div class="stat"><b style="color:${activeNow ? 'var(--good)' : 'inherit'}">${activeNow}</b><span>${t('activeNow')}</span></div>
+    <div class="stat"><b>${users.length}</b><span>${t('members')}</span></div>
+    <div class="stat"><b>${fmtMoney(revToday)}</b><span>${t('revToday')}</span></div>
+    <div class="stat"><b style="color:${totalDue ? 'var(--warn)' : 'inherit'}">${fmtMoney(totalDue)}</b><span>${t('statDue')}</span></div>
+  </div>
+
+  <div class="card">
+    <h2>${t('settings')}</h2>
+    <form onsubmit="return A.saveSettings(event)">
+      <div class="row-between" style="gap:14px">
+        <div class="field" style="flex:1;min-width:150px"><label>${t('rateLabel')}</label>
+          <input id="rate" class="input" type="number" min="0" step="0.5" value="${db.settings.hourlyRate}" required></div>
+        <div class="field" style="flex:1.4;min-width:200px"><label>${t('roundLabel')}</label>
+          <select id="rounding" class="input">
+            <option value="exact" ${db.settings.rounding==='exact'?'selected':''}>${t('rExact')}</option>
+            <option value="15m" ${db.settings.rounding==='15m'?'selected':''}>${t('r15')}</option>
+            <option value="30m" ${db.settings.rounding==='30m'?'selected':''}>${t('r30')}</option>
+            <option value="60m" ${db.settings.rounding==='60m'?'selected':''}>${t('r60')}</option>
+          </select></div>
+      </div>
+      <div class="row-between">
+        <button type="button" class="linklike" onclick="A.go('adminPass')">${t('adminPassLink')}</button>
+        <div style="display:flex;gap:8px">
+          <button type="button" class="btn sm ghost" onclick="A.exportCsv()">⬇ ${t('exportCsv')}</button>
+          <button class="btn sm" type="submit">${t('save')}</button>
+        </div>
+      </div>
+    </form>
+  </div>
+
+  <div class="card">
+    <h2>${t('allUsers')}</h2>
+    <p class="sub">${t('brand')} · ${users.length} ${t('usersCount')}</p>
+    ${users.length ? `<div class="tbl-wrap">
+      <div class="urow head">
+        <div>${t('mobile')}</div><div>${t('colHours')}</div><div>${t('colVisits')}</div><div>${t('colDue')}</div><div></div>
+      </div>${rows}</div>`
+      : `<div class="empty">${t('noUsers')}</div>`}
+  </div>
+  <p class="footnote">${t('deviceNote')}</p>`;
+}
+
+function vAdminPass(){
+  return pinHead(t('adminPassLink'), t('adminTitle')) + `
+    <form onsubmit="return A.submitAdminPass(event)">
+      <div class="field"><label>${t('curPin')}</label>
+        <input id="pc" class="input big" type="password" inputmode="numeric" maxlength="8" required></div>
+      <div class="field"><label>${t('newPin')}</label>
+        <input id="p1" class="input big" type="password" inputmode="numeric" maxlength="8" required></div>
+      <div class="field"><label>${t('pass2')}</label>
+        <input id="p2" class="input big" type="password" inputmode="numeric" maxlength="8" required></div>
+      <div class="err" id="err"></div>
+      <button class="btn hero" type="submit">${t('save')}</button>
+    </form>
+  </div>`;
+}
+
+/* ---------------- live timer ---------------- */
+setInterval(() => {
+  const clock = $('liveClock');
+  if (clock && S.mobile && db.users[S.mobile] && db.users[S.mobile].activeSession){
+    const st = db.users[S.mobile].activeSession.startTs;
+    clock.textContent = fmtClock(Date.now() - st);
+    const cost = $('liveCost');
+    if (cost){
+      const rate = Number(db.settings.hourlyRate) || 0;
+      cost.textContent = rate ? fmtMoney(calcCost(Math.max(1, Math.ceil((Date.now()-st)/60000)))) : '';
+    }
+  }
+  document.querySelectorAll('.live-dur').forEach(el => {
+    const u = db.users[el.dataset.m];
+    if (u && u.activeSession)
+      el.textContent = fmtDur(Math.max(1, Math.round((Date.now()-u.activeSession.startTs)/60000)));
+  });
+}, 1000);
+
+/* ---------------- actions ---------------- */
+function lockCheck(){
+  if (Date.now() < S.lockUntil){
+    setErr(t('lock', {s: Math.ceil((S.lockUntil - Date.now())/1000)}));
+    return true;
+  }
+  return false;
+}
+function failAttempt(){ S.tries++; if (S.tries >= 5){ S.lockUntil = Date.now() + 30000; S.tries = 0; } }
+
+const A = {
+  toggleLang(){ LANG = LANG === 'ar' ? 'en' : 'ar'; localStorage.setItem(LS_LANG, LANG); render(); },
+  go(view){ go(view); },
+  logout(){ S.mobile = null; S.admin = false; go('home'); },
+
+  async submitFirstRun(e){
+    e.preventDefault();
+    const p1 = val('p1'), p2 = val('p2');
+    if (p1.length < 4 || !/^\d+$/.test(p1)) return setErr(t('passLen')), false;
+    if (p1 !== p2) return setErr(t('mismatch')), false;
+    const {salt, hash} = await hashNew(p1);
+    db.settings.adminSalt = salt; db.settings.adminHash = hash; save();
+    toast(t('passSetOk')); go('home'); return false;
+  },
+
+  submitMobile(e){
+    e.preventDefault();
+    const m = normalizeMobile(val('mob'));
+    if (!m) return setErr(t('badMobile')), false;
+    S.mobile = m; S.tries = 0; S.lockUntil = 0;
+    const u = db.users[m];
+    go(u && u.pinHash ? 'pinLogin' : 'pinSetup');
+    return false;
+  },
+
+  async submitPinSetup(e){
+    e.preventDefault();
+    const m = S.mobile;
+    if (!m || !/^05\d{8}$/.test(m)) return go('home'), false;
+    const p1 = val('p1'), p2 = val('p2');
+    if (!/^\d{4,6}$/.test(p1)) return setErr(t('shortPin')), false;
+    if (p1 !== p2) return setErr(t('mismatch')), false;
+    const {salt, hash} = await hashNew(p1);
+    if (!db.users[m]) db.users[m] = {mobile:m, createdAt:Date.now(), sessions:[], activeSession:null};
+    db.users[m].pinSalt = salt; db.users[m].pinHash = hash; save();
+    go('userDash'); return false;
+  },
+
+  async submitPin(e){
+    e.preventDefault();
+    if (lockCheck()) return false;
+    const u = db.users[S.mobile];
+    if (!u) return go('home'), false;
+    if (await verifyPin(val('p1'), u.pinSalt, u.pinHash)){
+      S.tries = 0; go('userDash');
+    } else { failAttempt(); setErr(t('wrongPin')); $('p1').value = ''; $('p1').focus(); }
+    return false;
+  },
+
+  start(){
+    const u = db.users[S.mobile];
+    if (!u || u.activeSession) return;
+    u.activeSession = {startTs: Date.now()}; save(); render();
+  },
+
+  end(){
+    endSessionFor(S.mobile);
+    render();
+  },
+
+  async submitChangePin(e){
+    e.preventDefault();
+    const u = db.users[S.mobile];
+    if (!u) return go('home'), false;
+    if (!await verifyPin(val('pc'), u.pinSalt, u.pinHash)) return setErr(t('wrongPin')), false;
+    const p1 = val('p1'), p2 = val('p2');
+    if (!/^\d{4,6}$/.test(p1)) return setErr(t('shortPin')), false;
+    if (p1 !== p2) return setErr(t('mismatch')), false;
+    const {salt, hash} = await hashNew(p1);
+    u.pinSalt = salt; u.pinHash = hash; save();
+    toast(t('pinChanged')); go('userDash'); return false;
+  },
+
+  async submitAdmin(e){
+    e.preventDefault();
+    if (lockCheck()) return false;
+    if (await verifyPin(val('p1'), db.settings.adminSalt, db.settings.adminHash)){
+      S.admin = true; S.tries = 0; go('adminDash');
+    } else { failAttempt(); setErr(t('wrongPass')); $('p1').value = ''; $('p1').focus(); }
+    return false;
+  },
+
+  saveSettings(e){
+    e.preventDefault();
+    const rate = parseFloat(val('rate'));
+    db.settings.hourlyRate = isNaN(rate) ? 0 : Math.max(0, r2(rate));
+    db.settings.rounding = val('rounding') || '15m';
+    save(); toast(t('saved')); render(); return false;
+  },
+
+  adminEnd(m){ if (confirm(t('confirmEnd'))){ endSessionFor(m); render(); } },
+  markPaid(m){
+    if (!confirm(t('confirmPaid'))) return;
+    db.users[m].sessions.forEach(x => x.p = true); save(); render();
+  },
+  resetPin(m){
+    if (!confirm(t('confirmReset'))) return;
+    const u = db.users[m]; u.pinHash = null; u.pinSalt = null; save(); render();
+  },
+  delUser(m){
+    if (!confirm(t('confirmDel'))) return;
+    delete db.users[m]; save(); render();
+  },
+
+  exportCsv(){
+    const rows = [['mobile','total_minutes','total_cost','unpaid','visits','last_activity']];
+    for (const m of Object.keys(db.users)){
+      const u = db.users[m], tt = userTotals(m);
+      const totalCost = u.sessions.reduce((a,b) => a + b.c, 0);
+      rows.push([m, tt.totalMin, r2(totalCost), r2(tt.due), u.sessions.length,
+        tt.last ? new Date(tt.last).toISOString() : '']);
+    }
+    const csv = '\ufeff' + rows.map(r => r.join(',')).join('\r\n');
+    const a = document.createElement('a');
+    a.href = URL.createObjectURL(new Blob([csv], {type:'text/csv;charset=utf-8'}));
+    a.download = 'manova-study-hours-' + new Date().toISOString().slice(0,10) + '.csv';
+    a.click(); setTimeout(() => URL.revokeObjectURL(a.href), 4000);
+  },
+
+  async submitAdminPass(e){
+    e.preventDefault();
+    if (!await verifyPin(val('pc'), db.settings.adminSalt, db.settings.adminHash))
+      return setErr(t('wrongPass')), false;
+    const p1 = val('p1'), p2 = val('p2');
+    if (p1.length < 4 || !/^\d+$/.test(p1)) return setErr(t('passLen')), false;
+    if (p1 !== p2) return setErr(t('mismatch')), false;
+    const {salt, hash} = await hashNew(p1);
+    db.settings.adminSalt = salt; db.settings.adminHash = hash; save();
+    toast(t('saved')); go('adminDash'); return false;
+  }
+};
+window.A = A;
+
+function endSessionFor(m){
+  const u = db.users[m];
+  if (!u || !u.activeSession) return;
+  const st = u.activeSession.startTs, e = Date.now();
+  const min = Math.max(1, Math.round((e - st)/60000));
+  const cost = calcCost(min);
+  u.sessions.unshift({s: st, e, m: min, c: cost, p: false});
+  u.activeSession = null; save();
+  toast(t('sessionEnded', {d: fmtDur(min), c: cost ? fmtMoney(cost) : '—'}));
+}
+
+render();
+</script>
+</body>
+</html>
